@@ -1,4 +1,5 @@
 import jsonwebtoken from "jsonwebtoken";
+import { JWT_SECRET } from "../utils/gerarToken.js";
 
 function autenticar(req, res, next) {
   const authHeader = req.headers.authorization;
@@ -14,8 +15,8 @@ function autenticar(req, res, next) {
   }
   
   try {
-    const payload = jsonwebtoken.verify(token, process.env.JWT_SECRET);
-    req.aluno = payload;
+    const payload = jsonwebtoken.verify(token, JWT_SECRET);
+    req.usuario = payload;
     return next();
   } catch (error) {
     return res.status(401).json({ message: "Token inválido!" });
