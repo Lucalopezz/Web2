@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+import jsonwebtoken from "jsonwebtoken";
 
 function autenticar(req, res, next) {
   const authHeader = req.headers.authorization;
@@ -12,14 +12,13 @@ function autenticar(req, res, next) {
   if (tipo !== "Bearer" || !token) {
     return res.status(401).json({ message: "Token inválido!" });
   }
-
+  
   try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET);
+    const payload = jsonwebtoken.verify(token, process.env.JWT_SECRET);
     req.aluno = payload;
     return next();
   } catch (error) {
     return res.status(401).json({ message: "Token inválido!" });
   }
 }
-
-module.exports = autenticar;
+export default autenticar;

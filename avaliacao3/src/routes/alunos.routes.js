@@ -1,6 +1,6 @@
-const { Router } = require("express");
-const autenticar = require("../middlewares/auth.middleware");
-const {
+import { Router } from "express";
+import autenticar from "../middlewares/auth.middleware.js";
+import {
   listarAlunos,
   listarMedias,
   listarAprovados,
@@ -8,7 +8,7 @@ const {
   criarAluno,
   atualizarAluno,
   removerAluno
-} = require("../controllers");
+} from "../controllers/index.js";
 
 const router = Router();
 
@@ -25,4 +25,4 @@ router.post("/", criarAluno);
 router.put("/:id", atualizarAluno);
 router.delete("/:id", removerAluno);
 
-module.exports = router;
+export default router;
